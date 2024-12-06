@@ -59,4 +59,4 @@ def main_NetworkScanning():
             print("Vulnerability Check")
             print(ports_vuln)
             
-main_NetworkScanning()
+#main_NetworkScanning()

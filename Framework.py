@@ -12,15 +12,15 @@ def Display():
     print(" -2- Network Scanning")
     print(" -3- Enumeration")
     print(" -4- Gaining Access")
-    choice = input("Please select the feature you would like to use : ")
+    choice = int(input("Please select the feature you would like to use : "))
     if(choice == 1):
         print(" -1- Social Engineering")
         print(" -2- Reconnaissance")
-        choice2 = input("Please select a subtask : ")
+        choice2 = int(input("Please select a subtask : "))
         if(choice2 == 1) :
             print("DEV")
             return None
-        elif(choice==2):   
+        elif(choice2==2):   
             fpwhois.get_whois()
             return None
         else :
@@ -30,11 +30,11 @@ def Display():
         print(" -1- Network Scan")
         print(" -2- Ports Scan")
         print(" -3- Vulnerabilities Scan")
-        choice2 = input("Please select a subtask : ")
+        choice2 = int(input("Please select a subtask : "))
         if(choice2 == 1) :
             print(" -1- PING")
             print(" -2- NMAP")
-            choice3 = input("Please select a tool : ")
+            choice3 = int(input("Please select a tool : "))
             if(choice3==1):
                 NSP.Ping_Network()
                 return None
@@ -44,10 +44,10 @@ def Display():
             else : 
                 print(f"No subtask tools to choice number {choice3}")
             return None
-        elif(choice==2):   
+        elif(choice2==2):   
             NSN.scan_ports
             return None
-        elif(choice==3):
+        elif(choice2==3):
             NSN.scan_ports_Vulscan
             return None
         else :
@@ -56,7 +56,7 @@ def Display():
         print(" -1- Banner Grabbing")
         print(" -2- OS Enumeration")
         print(" -3- User enumeration")
-        choice2 = input("Please select a subtask : ")
+        choice2 = int(input("Please select a subtask : "))
         if(choice2==1):
             banner.banner_grabbing()
             return None
