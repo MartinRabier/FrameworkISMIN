@@ -6,7 +6,7 @@ def banner_grabbing(port_range="1-1000"):
     target = input("What is the targeted domain ?")
     try :
         nm = nmap.PortScanner()
-        print(f"Scanning {traget} on ports {port_range}...\n")
+        print(f"Scanning {target} on ports {port_range}...\n")
         nm.scan(hosts=target,ports=port_range,arguments ="-sV")
         for host in nmap.all_hosts():
             print(f"Host : {host} ({nm[host].hostname()})")

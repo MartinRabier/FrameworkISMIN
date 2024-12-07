@@ -6,7 +6,7 @@ def OS_enumeration():
     target = input("What is the targeted domain ?")
     try :
         nm = nmap.PortScanner()
-        print(f"Scanning OS on {traget}...\n")
+        print(f"Scanning OS on {target}...\n")
         nm.scan(hosts=target,arguments ="-O")
         for host in nmap.all_hosts():
             print(f"Host : {host} ({nm[host].hostname()})")

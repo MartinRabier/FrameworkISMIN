@@ -4,7 +4,7 @@ import Enumeration.USERenumeration as USE
 import Footprint.footprint_whois as fpwhois
 import NetworkScanning.NetworkScan_Ping as NSP
 import NetworkScanning.NetworkScanningNMAP as NSN
-
+import GainningAccess.WebScan_nikto as NIK  # Ajout de l'importation
 
 def Display():
     print("\--- Framework SRIE Bonnet Panhelleux Rabier ---/\n")
@@ -21,7 +21,8 @@ def Display():
             print("DEV")
             return None
         elif(choice2==2):   
-            fpwhois.get_whois()
+            domain = input("Enter the domain to look up: ")
+            fpwhois.get_whois(domain)
             return None
         else :
             print(f"No subtask linked to choice number {choice2}")
@@ -70,7 +71,7 @@ def Display():
             print(f"No subtask linked to choice number {choice2}")
             return None
     elif(choice==4):
-        print("DEV")
+        NIK.main()
         return None
     else :
         print(f"No tool is implementend on choice n° {choice}")

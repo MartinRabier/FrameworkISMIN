@@ -2,8 +2,7 @@
 
 import whois
 
-def get_whois():
-    domain = input("What website would you like to know more about ?")
+def get_whois(domain):
     try : 
         info = whois.whois(domain)
         print(info)
