@@ -1,7 +1,11 @@
 import subprocess
 import time
 
-def nikto_scan(target_url):
+def nikto_scan():
+    target_url = input("Enter the target URL: ")
+    if not target_url.startswith("http://") and not target_url.startswith("https://"):
+        print("Invalid URL format. Please include 'http://' or 'https://'.")
+        return
     nikto_command = ["nikto", "-h", target_url]
     try:
         print("Starting Nikto scan. This may take a while...")
@@ -10,12 +14,5 @@ def nikto_scan(target_url):
     except Exception as e:
         print(f"Error running Nikto scan: {e}")
 
-def main():
-    target_url = input("Enter the target URL: ")
-    if not target_url.startswith("http://") and not target_url.startswith("https://"):
-        print("Invalid URL format. Please include 'http://' or 'https://'.")
-        return
-    nikto_scan(target_url)
+nikto_scan()
 
-if __name__ == "__main__":
-    main()
