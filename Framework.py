@@ -37,19 +37,23 @@ def Display():
             print(" -2- NMAP")
             choice3 = int(input("Please select a tool : "))
             if(choice3==1):
-                NSP.Ping_Network()
+                network_prefix = input("Enter a network prefix (ie. 192.168.90) : ")
+                start = int(input("Enter the scan's starting host number : "))
+                end = int(input("Enter the scan's ending host number : "))
+                NSP.Ping_Network(network_prefix, start, end)
                 return None
             elif(choice3==2):
-                NSN.scan_network()
+                NSN.main_NetworkScanning()
                 return None
             else : 
                 print(f"No subtask tools to choice number {choice3}")
             return None
         elif(choice2==2):   
-            NSN.scan_ports
+            NSN.scan_ports()
             return None
         elif(choice2==3):
-            NSN.scan_ports_Vulscan
+            print("Vulnerability scan takes time, this step may take up to 5 minutes")
+            NSN.scan_vul()
             return None
         else :
             print(f"No subtask linked to choice number {choice2}")

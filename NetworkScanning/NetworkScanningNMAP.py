@@ -2,7 +2,6 @@ import subprocess
 import socket
 import ipaddress
 import psutil
-import requests
 
 def get_private_ip_and_subnet():
     for interface, addrs in psutil.net_if_addrs().items():
@@ -11,52 +10,71 @@ def get_private_ip_and_subnet():
                 return addr.address, addr.netmask
     return None, None
 
-def scan_network(ip, subnet):
-
+def scan_network():
+    ip = input("Enter the IP you want to scan (example: 192.168.34.0) : ")
+    subnet = "255.255.255.0"
     network = ipaddress.IPv4Network(f"{ip}/{subnet}", strict=False)
     print(network)
-    scan_command = ["C:\\Program Files (x86)\\Nmap\\nmap.exe", "-sn", str(network)]
-    result = subprocess.run(scan_command, capture_output=True, text=True,shell=True)
-    return result.stdout
+    scan_command = ['sudo', 'nmap', '-sn', str(network)]
+    result = subprocess.run(scan_command, capture_output=True, text=True)
+    print(result.stdout)
+    return ip,result.stdout
 
-def scan_ports(ip):
-    
-    scan_command = ["C:\\Program Files (x86)\\Nmap\\nmap.exe","-sV", ip]
-    result = subprocess.run(scan_command, capture_output=True, text=True,shell=True)
-    return result.stdout
+#scan_network()
 
-def scan_ports_Vulscan(ip):
-    
-    scan_command = ["C:\\Program Files (x86)\\Nmap\\nmap.exe","-sV","--script=vulscan", ip]
-    result = subprocess.run(scan_command, capture_output=True, text=True,shell=True,timeout = 60)
-    if result.stderr:
-        print(f"Error running Nmap: {result.stderr}")
-    return result.stdout
-
-
-
-def main_NetworkScanning():
-    ip, subnet = get_private_ip_and_subnet()
-    if not ip or not subnet:
-        print("Could not determine IP or subnet.")
-        return
-    print(f"Private IP: {ip}")
-    print(f"Subnet Mask: {subnet}")
-
-    print("\nScanning network for active devices...")
-    devices = scan_network("192.168.31.0", subnet)
-    print(devices)
-
-    print("\nScanning ports for detected devices...")
-    for line in devices.splitlines():
+def scan_ports():
+    ip = input("Enter the IP you want to scan (example: 192.168.34.0) : ")
+    subnet = "255.255.255.0"
+    network = ipaddress.IPv4Network(f"{ip}/{subnet}", strict=False)
+    print(network)
+    scan_command = ['sudo', 'nmap', '-sn', str(network)]
+    devices = subprocess.run(scan_command, capture_output=True, text=True)
+    for line in devices.stdout.splitlines():
         if "Nmap scan report for" in line:
             detected_ip = line.split()[-1]
             print(f"\nScanning ports on {detected_ip}...")
-            ports = scan_ports(detected_ip)
-            ports_vuln = scan_ports_Vulscan(detected_ip)
-            print("Flag getter")
-            print(ports)
-            print("Vulnerability Check")
-            print(ports_vuln)
-            
-#main_NetworkScanning()
+            scan_command = ['sudo','nmap', '-sV', detected_ip]
+            ports = subprocess.run(scan_command, capture_output=True, text=True)
+            print("Ports scan results:")
+            print(ports.stdout)
+    return None
+
+#scan_ports()
+
+def scan_vul():
+    """
+    Fonction pour scanner les vulnérabilités sur les appareils actifs du réseau.
+    """
+    ip = input("Enter the IP you want to scan (example: 192.168.34.0) : ")
+    subnet = "255.255.255.0"
+    network = ipaddress.IPv4Network(f"{ip}/{subnet}", strict=False)
+    print(f"Scanning network: {network}")
+
+    # Scan réseau pour détecter les appareils actifs
+    scan_command = ['sudo', 'nmap', '-sn', str(network)]
+    devices = subprocess.run(scan_command, capture_output=True, text=True)
+
+    if devices.returncode != 0:
+        print(f"Error during network scan: {devices.stderr}")
+        return
+
+    # Extraction des IP actives
+    active_ips = []
+    for line in devices.stdout.splitlines():
+        if "Nmap scan report for" in line:
+            detected_ip = line.split()[-1]
+            active_ips.append(detected_ip)
+
+    # Scan des vulnérabilités pour chaque IP détectée
+    for detected_ip in active_ips:
+        print(f"\nScanning vulnerabilities on {detected_ip}...")
+        scan_command = ['sudo', 'nmap', '-sV', '--script=vulscan', detected_ip]
+        ports = subprocess.run(scan_command, capture_output=True, text=True)
+
+        if ports.returncode != 0:
+            print(f"Error during vulnerability scan on {detected_ip}: {ports.stderr}")
+            continue
+
+        print("Vulnerability scan results:")
+        print(ports.stdout)
+
