@@ -14,5 +14,4 @@ def nikto_scan():
     except Exception as e:
         print(f"Error running Nikto scan: {e}")
 
-nikto_scan()
 

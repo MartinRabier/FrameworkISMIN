@@ -7,7 +7,7 @@ def SMB_enumeration():
     try :
         nm = nmap.PortScanner()
         print(f"Enumerating SMB/Windows users on target : {target}")
-        nm.scan(hosts=target,arguments="--script=smbenum-users -p 445")
+        nm.scan(hosts=target,arguments="--script=smb-enum-users -p 445")
         for host in nm.all_hosts() :
             print(f"Host : {host} ({nm[host].hostname()})")
             print(f"State : {nm[host].state}")
@@ -73,8 +73,5 @@ def HTTP_enumeration():
 def All_enumeration():
     print("Proceeding to all sort of users enumeration")
     SMB_enumeration()
-    SSH_enumeration()
-    RDP_enumeration()
-    HTTP_enumeration()
 
     
