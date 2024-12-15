@@ -1,0 +1,16 @@
+<!-- filepath: myapp/templates/index.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Framework SRIE</title>
+</head>
+<body>
+    <h1>Framework SRIE Bonnet Panhelleux Rabier</h1>
+    <form action="{% url 'whois_lookup' %}" method="get">
+        <label for="domain">Enter the domain to look up:</label>
+        <input type="text" id="domain" name="domain">
+        <button type="submit">Lookup</button>
+    </form>
+    <!-- Ajoutez des formulaires similaires pour les autres fonctions -->
+</body>
+</html>

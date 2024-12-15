@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Security Tools</title>
+</head>
+<body>
+    <h1>Security Tools</h1>
+    <form method="post">
+        {% csrf_token %}
+        <button name="action" value="scan_network">Scan Network</button>
+        <button name="action" value="scan_ports">Scan Ports</button>
+        <button name="action" value="scan_vul">Scan Vulnerabilities</button>
+        <button name="action" value="brute_force">Brute Force</button>
+        <button name="action" value="exploit_vsftpd">Exploit VSFTPD</button>
+        <button name="action" value="html_site">HTML Site</button>
+        <input type="text" name="domain" placeholder="Enter domain for WHOIS">
+        <button name="action" value="get_whois">Get WHOIS</button>
+        <button name="action" value="SMB_enumeration">SMB Enumeration</button>
+        <button name="action" value="SSH_enumeration">SSH Enumeration</button>
+        <button name="action" value="RDP_enumeration">RDP Enumeration</button>
+        <button name="action" value="All_enumeration">All Enumeration</button>
+        <button name="action" value="OS_enumeration">OS Enumeration</button>
+        <button name="action" value="banner_grabbing">Banner Grabbing</button>
+    </form>
+    <div>
+        <h2>Result:</h2>
+        <pre>{{ result }}</pre>
+    </div>
+</body>
+</html>
