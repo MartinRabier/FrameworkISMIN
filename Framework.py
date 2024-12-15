@@ -92,7 +92,7 @@ def Display():
             BE.exploit_vsftpd()
             Display()
         elif(choice2==3):
-            MET.metasploit()
+            MET.exploit_vsftpd()
             Display()
         else :
             print(f"No tool is implementend on choice n°{choice}")

@@ -12,6 +12,7 @@ exploit
         rc_file.write(rc_content)
 
 def exploit_vsftpd():
+    print("This feature uses the metasploit framework to exploit breaches, we need to select a specifi exploit, target an ip address and let the magic happen")
     """Lance Metasploit pour exploiter la vulnérabilité VSFTPD."""
     ip_address = input("What is the targeted IP ? :")
     create_rc_file(ip_address)
