@@ -2,6 +2,7 @@ import nmap
 import subprocess
 
 def OS_enumeration():
+    print("This feature uses Nmap to enumerate OSs running thanks to the command \"-O\" which uses TCP/IP protocol stack fingerprinting to analyze targets responses to various probes")
     target = input("What is the targeted domain ?")
     try:
         nm = nmap.PortScanner()

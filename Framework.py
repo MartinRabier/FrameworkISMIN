@@ -7,6 +7,7 @@ import NetworkScanning.NetworkScanningNMAP as NSN
 import GainningAccess.hydra as HY
 import GainningAccess.backdoor_exploit as BE
 import Footprint.Scrapping as SCR
+import GainningAccess.metasploit as MET
 
 def Display():
     print("\--- Framework SRIE Bonnet Panhelleux Rabier ---/\n")
@@ -24,7 +25,7 @@ def Display():
         choice2 = int(input("Please select a subtask : \n"))
         if(choice2 == 1) :
             SCR.html_site()
-            Display
+            Display()
         elif(choice2==2):   
             fpwhois.get_whois()
             Display()
@@ -81,13 +82,17 @@ def Display():
     elif(choice==4):
         print("\-- Bellow are some tools to gain access on vulnerable ports --/\n")
         print(" -1- Bruteforce Hydra" )
-        print(" -2- Backdoor Metasploit")
+        print(" -2- Manual backdoor exploit")
+        print(" -3- Metasploit backdoor exploit")
         choice2 = int(input("Please select a tool : \n"))
         if(choice2==1):
             HY.brute_force()
             Display()
         elif(choice2==2):
             BE.exploit_vsftpd()
+            Display()
+        elif(choice2==3):
+            MET.metasploit()
             Display()
         else :
             print(f"No tool is implementend on choice n°{choice}")

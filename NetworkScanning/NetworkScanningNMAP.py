@@ -11,6 +11,8 @@ def get_private_ip_and_subnet():
     return None, None
 
 def scan_network():
+    print("Network scan is a simple tool to verify the connectivity between two devices.")
+    print("\nYou have to provide the network prefix which is the first three octets of the IP address.")
     ip = input("Enter the IP you want to scan (example: 192.168.34.0) : ")
     subnet = "255.255.255.0"
     network = ipaddress.IPv4Network(f"{ip}/{subnet}", strict=False)
@@ -20,9 +22,11 @@ def scan_network():
     print(result.stdout)
     return ip,result.stdout
 
-#scan_network()
 
 def scan_ports():
+    print("Port scan is a method used to determine which ports on a network are open and which are closed.")
+    print("\nYou have to provide the network prefix which is the first three octets of the IP address. \nIn reality we will scan all the IP addresses in the network. \nAfter that we will scan the ports of the active devices.")
+    print("\nThis step may take up to 5 minutes")
     ip = input("Enter the IP you want to scan (example: 192.168.34.0) : ")
     subnet = "255.255.255.0"
     network = ipaddress.IPv4Network(f"{ip}/{subnet}", strict=False)
@@ -39,12 +43,13 @@ def scan_ports():
             print(ports.stdout)
     return None
 
-#scan_ports()
 
 def scan_vul():
     """
     Fonction pour scanner les vulnérabilités sur les appareils actifs du réseau.
     """
+    print("Vulnerability scan is a method used to detect vulnerabilities on a network.")
+    print("\nAs the network scan, you have to provide the network prefix which is the first three octets of the IP address. \nIn reality we will scan all the IP addresses in the network. \nAfter that we will scan the vulnerabilities of the active devices.")
     print("Vulnerability scan takes time, this step may take up to 5 minutes")
     ip = input("Enter the IP you want to scan (example: 192.168.34.0) : ")
     subnet = "255.255.255.0"

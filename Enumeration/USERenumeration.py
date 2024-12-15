@@ -1,7 +1,9 @@
+
 import nmap
 import subprocess
 
 def SMB_enumeration():
+    print("This feature runs Nmap SMB users enumeration script on port 445 and queries it to enumerate users ")
     target = input("What is the targeted domain ?")
     try:
         nm = nmap.PortScanner()
@@ -12,7 +14,8 @@ def SMB_enumeration():
     except Exception as e:
         print(f"Error : {e}")
 
-def SSH_enumeration():
+def SMTP_enumeration():
+    print("This feature runs Nmap SMTP users enumeration script on port 25 and queries it to enumerate users ")
     target = input("What is the targeted domain ?")
     try:
         nm = nmap.PortScanner()
@@ -24,6 +27,7 @@ def SSH_enumeration():
         print(f"Error : {e}")
 
 def RDP_enumeration():
+    print("This feature runs Nmap RDP users enumeration script on port 3389 and queries it to enumerate users ")
     target = input("What is the targeted domain ?")
     try:
         nm = nmap.PortScanner()
@@ -35,16 +39,20 @@ def RDP_enumeration():
         print(f"Error : {e}")
 
 def All_enumeration():
-    print("Select enumeration type:")
-    print("1. SMB Enumeration")
-    print("2. SSH Enumeration")
-    print("3. RDP Enumeration")
-    choice = input("Enter your choice: ")
+    print("Select enumeration type : \n")
+    print("-1- SMB Enumeration")
+    print("-2- SMTP Enumeration")
+    print("-3- RDP Enumeration")
+    choice = input("Enter your choice: \n")
     if choice == "1":
         SMB_enumeration()
+        return None
     elif choice == "2":
-        SSH_enumeration()
+        SMTP_enumeration()
+        return None 
     elif choice == "3":
         RDP_enumeration()
+        return None
     else:
-        print("Invalid choice")
+        print(f"No enumration for choice n°{choice}\n")
+        All_enumeration()

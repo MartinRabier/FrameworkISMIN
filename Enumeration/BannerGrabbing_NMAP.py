@@ -1,6 +1,7 @@
 import nmap
 
 def banner_grabbing(port_range="1-1000"):
+    print("This feature uses Nmap to grab banners thanks to the command \"-Sv\" which scans open ports and try to determine running services")
     target = input("What is the targeted domain ?")
     try:
         nm = nmap.PortScanner()
