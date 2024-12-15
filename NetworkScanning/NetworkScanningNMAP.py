@@ -45,6 +45,7 @@ def scan_vul():
     """
     Fonction pour scanner les vulnérabilités sur les appareils actifs du réseau.
     """
+    print("Vulnerability scan takes time, this step may take up to 5 minutes")
     ip = input("Enter the IP you want to scan (example: 192.168.34.0) : ")
     subnet = "255.255.255.0"
     network = ipaddress.IPv4Network(f"{ip}/{subnet}", strict=False)

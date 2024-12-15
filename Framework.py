@@ -10,84 +10,96 @@ import Footprint.Scrapping as SCR
 
 def Display():
     print("\--- Framework SRIE Bonnet Panhelleux Rabier ---/\n")
-    print(" -1- Reconnaissance / Footprint")
-    print(" -2- Network Scanning")
-    print(" -3- Enumeration")
-    print(" -4- Gaining Access")
-    choice = int(input("Please select the feature you would like to use : "))
+    print("This framework allows you to use easily different kind of cybersecurity tools\n")
+    print(" [-1-] Reconnaissance / Footprint")
+    print(" [-2-] Network Scanning")
+    print(" [-3-] Enumeration")
+    print(" [-4-] Gaining Access")
+    print(" [-5-] Exit framework")
+    choice = int(input("Please select a field above : \n"))
     if(choice == 1):
-        print(" -1- Social Engineering")
+        print("\-- Bellow are some tools to get data from websites --/\n")
+        print(" -1- HTML Scrapping")
         print(" -2- Reconnaissance")
-        choice2 = int(input("Please select a subtask : "))
+        choice2 = int(input("Please select a subtask : \n"))
         if(choice2 == 1) :
             SCR.html_site()
-            return None
+            Display
         elif(choice2==2):   
-            domain = input("Enter the domain to look up: ")
-            fpwhois.get_whois(domain)
-            return None
+            fpwhois.get_whois()
+            Display()
         else :
-            print(f"No subtask linked to choice number {choice2}")
-            return None
+            print(f"No subtask linked to choice n°{choice2}\n")
+            Display()
     elif(choice==2):
+        print("\-- Bellow are some tools to get information on a network and its ports --/\n")
         print(" -1- Network Scan")
         print(" -2- Ports Scan")
         print(" -3- Vulnerabilities Scan")
-        choice2 = int(input("Please select a subtask : "))
+        choice2 = int(input("Please select a subtask : \n"))
         if(choice2 == 1) :
+            print("\-- Here are two different ways to perform a network scan --/\n")
             print(" -1- PING")
             print(" -2- NMAP")
-            choice3 = int(input("Please select a tool : "))
+            choice3 = int(input("Please select a tool : \n"))
             if(choice3==1):
-                network_prefix = input("Enter a network prefix (ie. 192.168.90) : ")
-                start = int(input("Enter the scan's starting host number : "))
-                end = int(input("Enter the scan's ending host number : "))
-                NSP.Ping_Network(network_prefix, start, end)
-                return None
+                NSP.Ping_Network()
+                Display()
             elif(choice3==2):
-                NSN.main_NetworkScanning()
-                return None
+                NSN.scan_network()
+                Display() 
             else : 
-                print(f"No subtask tools to choice number {choice3}")
-            return None
+                print(f"No tool linked to choice n°{choice3}\n")
+                Display()
         elif(choice2==2):   
             NSN.scan_ports()
-            return None
+            Display()
         elif(choice2==3):
-            print("Vulnerability scan takes time, this step may take up to 5 minutes")
             NSN.scan_vul()
-            return None
+            Display()
         else :
-            print(f"No subtask linked to choice number {choice2}")
+            print(f"No subtask linked to choice n°{choice2}\n")
+            Display()
     elif(choice==3):
+        print("\-- Bellow are some tools to grab banners or enumerate information --/\n")
         print(" -1- Banner Grabbing")
         print(" -2- OS Enumeration")
         print(" -3- User enumeration")
-        choice2 = int(input("Please select a subtask : "))
+        choice2 = int(input("Please select a subtask : \n"))
         if(choice2==1):
             banner.banner_grabbing()
-            return None
+            Display()
         elif(choice2==2):
             OSE.OS_enumeration()
-            return None
+            Display()
         elif(choice2==3):
             USE.All_enumeration()
-            return None
+            Display()
         else :
-            print(f"No subtask linked to choice number {choice2}")
-            return None
+            print(f"No subtask linked to choice n°{choice2}\n")
+            Display()
     elif(choice==4):
+        print("\-- Bellow are some tools to gain access on vulnerable ports --/\n")
         print(" -1- Bruteforce Hydra" )
         print(" -2- Backdoor Metasploit")
-        choice2 = int(input("Please select a tool : "))
+        choice2 = int(input("Please select a tool : \n"))
         if(choice2==1):
             HY.brute_force()
-            return None
+            Display()
         elif(choice2==2):
             BE.exploit_vsftpd()
-            return None
-    else :
-        print(f"No tool is implementend on choice n° {choice}")
+            Display()
+        else :
+            print(f"No tool is implementend on choice n°{choice}")
+            Display()
+    elif(choice==5):
+        print("Thanks for using or cybersecurity framework\n")
+        print("[*] Exiting Framework [*]\n")
+        print(" See U L8er ;)\n")
         return None
+    
+    else:
+        print(f"No field linked to choice n°{choice}\n")
+        Display()
     
 Display()
