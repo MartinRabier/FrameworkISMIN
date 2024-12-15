@@ -4,7 +4,9 @@ import Enumeration.USERenumeration as USE
 import Footprint.footprint_whois as fpwhois
 import NetworkScanning.NetworkScan_Ping as NSP
 import NetworkScanning.NetworkScanningNMAP as NSN
-import GainningAccess.WebScan_nikto as NIK  # Ajout de l'importation
+import GainningAccess.hydra as HY
+import GainningAccess.backdoor_exploit as BE
+import Footprint.Scrapping as SCR
 
 def Display():
     print("\--- Framework SRIE Bonnet Panhelleux Rabier ---/\n")
@@ -18,7 +20,7 @@ def Display():
         print(" -2- Reconnaissance")
         choice2 = int(input("Please select a subtask : "))
         if(choice2 == 1) :
-            print("DEV")
+            SCR.html_site()
             return None
         elif(choice2==2):   
             domain = input("Enter the domain to look up: ")
@@ -75,8 +77,15 @@ def Display():
             print(f"No subtask linked to choice number {choice2}")
             return None
     elif(choice==4):
-        NIK.main()
-        return None
+        print(" -1- Bruteforce Hydra" )
+        print(" -2- Backdoor Metasploit")
+        choice2 = int(input("Please select a tool : "))
+        if(choice2==1):
+            HY.brute_force()
+            return None
+        elif(choice2==2):
+            BE.exploit_vsftpd()
+            return None
     else :
         print(f"No tool is implementend on choice n° {choice}")
         return None
